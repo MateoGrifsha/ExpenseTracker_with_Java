@@ -6,67 +6,14 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class SignUp extends javax.swing.JFrame {
-    //makes fields empty after a sign up attempt
-    private void resetFields(){
+    Validator validate = new Validator();
+        //makes fields empty after a sign up attempt
+        private void resetFields(){
             nameInput.setText("");
             passwordInput.setText("");
             budgetInput.setText("");
     }
-    
-    //checks if the budget string is a proper integer
-    private boolean validateBudget(String budget){
-        try{
-            int validatedBudget = Integer.parseInt(budget);
-            return true;
-        }catch(Exception error){
-            resetFields();
-            return false;
-        }
-    }
-    
-    //check password format
-    private boolean validatePassword(String password){
-        //^ start of the string, $ end of the string
-        //(?=.*[A-Z]) at least one uppercase, (?=.*[a-z]) at least one lowercase, (?=.*\\d) at least one digit , 
-        //(?=.*[@$!%*#&]) at least one of these symbols @$!%*#&, 
-        //[A-Za-z\\d@$!%*?&]+ checks if the whole password has allowed values (which are uppercase, lowercase,numbers, and some symbols)
-        if(password.length() >= 8 && password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$")){
-            return true;
-        }
-        return false;
-    }
-    
-    private boolean validateInputs(String username, String password, String budget){
-        boolean isUsernameCorrect = username.length()>=3;
-        boolean isBudgetCorrect = validateBudget(budget);
-        boolean isPasswordCorrect = validatePassword(password);
-   
-
-        return (isUsernameCorrect && isBudgetCorrect && isPasswordCorrect);
-    }
-    
-    //writes the new data in the files
-    private void writeInDB(String username, String password, int budget){
-        try{
-            FileWriter usernameWriter = new FileWriter("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\usernameDB.txt");
-            FileWriter passwordWriter = new FileWriter("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\passwordDB.txt");
-            FileWriter budgetWriter = new FileWriter("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\budgetDB.txt");
-
-            usernameWriter.write(username + ";\n");
-            usernameWriter.close();
-            
-            passwordWriter.write(password + ";\n");
-            passwordWriter.close();
-            
-            budgetWriter.write(budget + ";");
-            budgetWriter.close();
-            
-            resetFields();
-        }
-      catch(IOException io){
-                     System.out.println("There was an error trying to write in the database!");
-      }
-}
+ 
     /**
      * Creates new form SignUp
      */
@@ -89,11 +36,11 @@ public class SignUp extends javax.swing.JFrame {
         nameInput = new javax.swing.JTextField();
         unitSelector = new javax.swing.JComboBox<>();
         budgetInput = new javax.swing.JTextField();
-        logoLabel = new javax.swing.JLabel();
         signUpBTN = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         psswLabel = new javax.swing.JLabel();
         budgetLabel = new javax.swing.JLabel();
+        userLogo = new javax.swing.JLabel();
         errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,11 +66,6 @@ public class SignUp extends javax.swing.JFrame {
 
         unitSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD", "ALL", "EUR" }));
 
-        logoLabel.setFont(new java.awt.Font("Georgia", 3, 72)); // NOI18N
-        logoLabel.setForeground(new java.awt.Color(0, 0, 102));
-        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("ET");
-
         signUpBTN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         signUpBTN.setText("SIGN UP");
         signUpBTN.addActionListener(new java.awt.event.ActionListener() {
@@ -144,58 +86,67 @@ public class SignUp extends javax.swing.JFrame {
         budgetLabel.setForeground(new java.awt.Color(51, 51, 51));
         budgetLabel.setText("BUDGET (whole number):");
 
+        userLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
+
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);
         mainContainerLayout.setHorizontalGroup(
             mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainContainerLayout.createSequentialGroup()
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainContainerLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(budgetLabel))
-                    .addGroup(mainContainerLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(psswLabel))
-                    .addGroup(mainContainerLayout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(signUpBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainContainerLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passwordInput)
-                            .addComponent(nameInput)
+                        .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainContainerLayout.createSequentialGroup()
-                                .addComponent(budgetInput, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(unitSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(53, 53, 53)
+                                .addComponent(budgetLabel))
                             .addGroup(mainContainerLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(nameLabel)))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                                .addGap(45, 45, 45)
+                                .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mainContainerLayout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(psswLabel)
+                                            .addComponent(nameLabel)))
+                                    .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(mainContainerLayout.createSequentialGroup()
+                                            .addComponent(budgetInput, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(unitSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(nameInput, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(passwordInput, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGap(0, 33, Short.MAX_VALUE))
+                    .addGroup(mainContainerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(userLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(signUpBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(201, 201, 201))
         );
         mainContainerLayout.setVerticalGroup(
             mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainContainerLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(39, 39, 39)
+                .addComponent(userLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(psswLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(budgetLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(budgetInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(unitSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(44, 44, 44)
                 .addComponent(signUpBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         errorLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -218,9 +169,9 @@ public class SignUp extends javax.swing.JFrame {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addComponent(mainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(errorLabel)
                 .addGap(31, 31, 31))
         );
@@ -250,13 +201,21 @@ public class SignUp extends javax.swing.JFrame {
        final String userBudget = budgetInput.getText();
        final String currencyType = unitSelector.getSelectedItem().toString();
        
-       
-       if(validateInputs(userName, userPassword, userBudget)){
-            writeInDB(userName, userPassword, Integer.parseInt(userBudget));
-            System.out.println("Written in db");
-       }else{
+       if(validate.validateInputs(userName, userPassword, userBudget)){
+            this.setVisible(false);
+            this.dispose();
+       }
+       else{
+                  if(userName.isEmpty() || userPassword.isEmpty() || userBudget.isEmpty()){
+                        errorLabel.setText("Please fill every field!");
+                    }
+                  else if(!validate.validateBudget(userBudget)){
+                        errorLabel.setText("The budget should be a whole number");
+                  }
+                  else{
+                            errorLabel.setText("The password must be at least 8 characters long, contain uppercase and lowercase letters, a number and a symbol!");
+                  }
                   resetFields();
-                  errorLabel.setText("The password must be at least 8 characters long, contain uppercase and lowercase letters, a number and a symbol!");
        }
     }//GEN-LAST:event_signUpBTNActionPerformed
 
@@ -299,7 +258,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField budgetInput;
     private javax.swing.JLabel budgetLabel;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JLabel logoLabel;
     private javax.swing.JPanel mainContainer;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField nameInput;
@@ -308,5 +266,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel psswLabel;
     private javax.swing.JButton signUpBTN;
     private javax.swing.JComboBox<String> unitSelector;
+    private javax.swing.JLabel userLogo;
     // End of variables declaration//GEN-END:variables
 }

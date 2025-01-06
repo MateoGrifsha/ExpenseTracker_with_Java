@@ -14,7 +14,8 @@ public class ExpenseTracker {
         SignUp S1 = new SignUp();
         S1.setVisible(true);
         
-        Home H1 = new Home("JEFF");
-        H1.setVisible(true);
+//        Home H1 = new Home("JEFF");
+//        H1.setVisible(true);
+
     }
 }
