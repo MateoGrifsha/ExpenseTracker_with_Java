@@ -202,8 +202,9 @@ public class SignUp extends javax.swing.JFrame {
        final String currencyType = unitSelector.getSelectedItem().toString();
        
        if(validate.validateInputs(userName, userPassword, userBudget)){
-            this.setVisible(false);
             this.dispose();
+           new Home().setVisible(true);
+  
        }
        else{
                   if(userName.isEmpty() || userPassword.isEmpty() || userBudget.isEmpty()){
