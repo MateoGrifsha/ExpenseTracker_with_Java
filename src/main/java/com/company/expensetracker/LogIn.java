@@ -39,14 +39,13 @@ public class LogIn extends javax.swing.JFrame {
         sendToSignUpLink = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Expense Tracker - Log In");
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 720));
 
         mainLogInPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         dataInputMainContainer.setBackground(new java.awt.Color(204, 204, 204));
-
-        userIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
 
         psswLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         psswLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -82,7 +81,7 @@ public class LogIn extends javax.swing.JFrame {
         dataInputMainContainerLayout.setHorizontalGroup(
             dataInputMainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataInputMainContainerLayout.createSequentialGroup()
-                .addContainerGap(190, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(userIcon)
                 .addGap(183, 183, 183))
             .addGroup(dataInputMainContainerLayout.createSequentialGroup()
@@ -98,7 +97,7 @@ public class LogIn extends javax.swing.JFrame {
                     .addGroup(dataInputMainContainerLayout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(logInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         dataInputMainContainerLayout.setVerticalGroup(
             dataInputMainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,23 +134,23 @@ public class LogIn extends javax.swing.JFrame {
         mainLogInPanelLayout.setHorizontalGroup(
             mainLogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLogInPanelLayout.createSequentialGroup()
-                .addContainerGap(317, Short.MAX_VALUE)
+                .addContainerGap(350, Short.MAX_VALUE)
                 .addGroup(mainLogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLogInPanelLayout.createSequentialGroup()
-                        .addComponent(dataInputMainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLogInPanelLayout.createSequentialGroup()
                         .addComponent(sendToSignUpLink)
-                        .addGap(365, 365, 365))))
+                        .addGap(355, 355, 355))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLogInPanelLayout.createSequentialGroup()
+                        .addComponent(dataInputMainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(231, 231, 231))))
         );
         mainLogInPanelLayout.setVerticalGroup(
             mainLogInPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLogInPanelLayout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
+                .addGap(128, 128, 128)
                 .addComponent(dataInputMainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
                 .addComponent(sendToSignUpLink)
-                .addGap(8, 8, 8))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,7 +174,7 @@ public class LogIn extends javax.swing.JFrame {
     private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
         // TODO add your handling code here:
         final String usernameInput = nameInput.getText();
-       final String userPassword = String.valueOf(passwordInput.getPassword());//turns char[] into String :))))))))))))
+        final String userPassword = String.valueOf(passwordInput.getPassword());//turns char[] into String :))))))))))))
         if(handleData.returnElementFromDB(0).equals(usernameInput) && handleData.returnElementFromDB(1).equals(userPassword)){
             this.dispose();
             new HomeFrame().setVisible(true);

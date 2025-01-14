@@ -11,10 +11,10 @@ package com.company.expensetracker;
 public class ExpenseTracker {
 
     public static void main(String[] args) {
-       SignUp s1 = new SignUp();
-       s1.setVisible(true);
-//            Table t1 = new Table();
-//            t1.setVisible(true);
+//       SignUp s1 = new SignUp();
+//       s1.setVisible(true);
+            Table t1 = new Table();
+            t1.setVisible(true);
 //            HomeFrame hf1 = new HomeFrame();
 //            hf1.setVisible(true);
     }

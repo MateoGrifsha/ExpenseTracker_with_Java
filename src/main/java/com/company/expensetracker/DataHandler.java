@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,8 +16,8 @@ import java.io.IOException;
  */
 public class DataHandler {
        //path to "DB
-        String userInfoPath ="C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\UserInfo.txt" ;
-        String expensePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\Expenses.txt";
+        String userInfoPath ="C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\UserInfo.txt" ;
+        String expensePath = "C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\Expenses.txt";
             
         public boolean isFileEmpty(String path){
             try{
@@ -75,7 +76,7 @@ public class DataHandler {
         
         public void addExpense(String name, String amount, String date){
             try{
-                FileWriter fw = new FileWriter(expensePath);
+                FileWriter fw = new FileWriter(expensePath, true);
                 String dataToWrite=name + "," + amount + "," + date + "\n";
                 fw.write(dataToWrite);
                 System.out.println("Data written in DB!");
@@ -87,21 +88,40 @@ public class DataHandler {
             }//end catch
         }
         
-        public String[] readExpenses(){
-            String[] dataExtracted = null;
+        public ArrayList<String> readExpenses(){
             try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
-                String line;
+            ArrayList<String> allData = new ArrayList<String>();
+            String line;
             while ((line = br.readLine()) != null) {
-                dataExtracted = line.split(",");
-                String name = dataExtracted[0];
-                String amount = dataExtracted[1];
-                String date = dataExtracted[2];
+                allData.add(line);
             }
+            
+            return allData; // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
             }
             catch(IOException error){
                 error.printStackTrace();
+                return null;
             }
-            return dataExtracted;
         }
+        //for search field
+        public ArrayList<String> readExpenses(String searchTerm){
+            try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
+            ArrayList<String> allData = new ArrayList<String>();
+            String line;
+            while ((line = br.readLine()) != null) {
+                if(line.toLowerCase().contains(searchTerm)){
+                    System.out.println(searchTerm);
+                    allData.add(line);
+                }
+            }
+            
+            return allData; // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
+            }
+            catch(IOException error){
+                error.printStackTrace();
+                return null;
+            }
+        }
+        
         
 }

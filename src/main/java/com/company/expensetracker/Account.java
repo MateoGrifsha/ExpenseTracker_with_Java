@@ -35,6 +35,7 @@ public class Account extends javax.swing.JFrame {
         addNavBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Expense Tracker - Account");
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 720));
 

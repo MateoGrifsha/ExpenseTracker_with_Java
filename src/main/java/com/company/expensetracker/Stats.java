@@ -35,6 +35,7 @@ public class Stats extends javax.swing.JFrame {
         addNavBtn5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Expense Tracker - Stats");
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 720));
 

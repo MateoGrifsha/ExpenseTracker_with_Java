@@ -111,7 +111,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
         topRightPanel.setBackground(new java.awt.Color(0, 0, 102));
 
-        userIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
+        userIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
 
         greetingLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -120,7 +120,7 @@ public class HomeFrame extends javax.swing.JFrame {
         topRightPanelLayout.setHorizontalGroup(
             topRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topRightPanelLayout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(topRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPanelLayout.createSequentialGroup()
                         .addComponent(greetingLbl)
@@ -231,11 +231,11 @@ public class HomeFrame extends javax.swing.JFrame {
                         .addGap(315, 315, 315))))
             .addGroup(mainHomePanelLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainHomePanelLayout.createSequentialGroup()
                         .addComponent(topLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
-                        .addComponent(topRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(topRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainHomePanelLayout.createSequentialGroup()
                         .addComponent(bottomLeftContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)

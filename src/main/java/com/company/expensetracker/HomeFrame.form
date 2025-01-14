@@ -71,11 +71,11 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="topLeftPanel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="topRightPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="topRightPanel" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="bottomLeftContainer" min="-2" max="-2" attributes="0"/>
@@ -207,7 +207,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="greetingLbl" min="-2" max="-2" attributes="0"/>
@@ -237,7 +237,7 @@
             <Component class="javax.swing.JLabel" name="userIcon">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\User\Documents\NetBeansProjects\ExpenseTracker\src\main\java\com\company\expensetracker\images\user.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\ExpenseTracker_with_Java\src\main\java\com\company\expensetracker\images\user.png"/>
                 </Property>
               </Properties>
             </Component>

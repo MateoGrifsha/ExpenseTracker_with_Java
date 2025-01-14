@@ -17,7 +17,9 @@ public class SignUp extends javax.swing.JFrame {
     public SignUp() {
         initComponents();
         if(!handleData.isFileEmpty(handleData.userInfoPath)){
-                      JOptionPane.showMessageDialog(null,"There is an account already created, please log in instead! ");
+            JOptionPane.showMessageDialog(null,"There is an account already created, please log in instead! ");
+            this.dispose();
+            new LogIn().setVisible(true);
         }
     }
 
@@ -40,7 +42,7 @@ public class SignUp extends javax.swing.JFrame {
         sendToLogInBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Expense Tracker");
+        setTitle("Expense Tracker - Sign Up");
         setBackground(new java.awt.Color(241, 241, 241));
         setBounds(new java.awt.Rectangle(0, 0, 1080, 720));
         setMinimumSize(new java.awt.Dimension(1080, 720));
@@ -83,7 +85,6 @@ public class SignUp extends javax.swing.JFrame {
         budgetLabel.setText("BUDGET (whole number):");
 
         userLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\ExpenseTracker\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
 
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);
@@ -111,7 +112,7 @@ public class SignUp extends javax.swing.JFrame {
                                             .addComponent(unitSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(nameInput, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(passwordInput, javax.swing.GroupLayout.Alignment.LEADING)))))
-                        .addGap(0, 33, Short.MAX_VALUE))
+                        .addGap(0, 37, Short.MAX_VALUE))
                     .addGroup(mainContainerLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(userLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))

@@ -4,25 +4,41 @@
  */
 package com.company.expensetracker;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 /**
  *
  * @author User
  */
 public class Table extends javax.swing.JFrame {
-
+    DataHandler handleData = new DataHandler();
+    DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultTableModel searchModel = new DefaultTableModel();
+    boolean searching = false;
     
     /**
      * Creates new form Table
      */
-    
-    DefaultTableModel tableModel = new DefaultTableModel();
     
     public Table() {
         initComponents();
         tableModel.addColumn("Name");
         tableModel.addColumn("Amount");
         tableModel.addColumn("Date");
+        searchModel.addColumn("Name");
+        searchModel.addColumn("Amount");
+        searchModel.addColumn("Date");
+        
+        
+        ArrayList<String> allData = handleData.readExpenses();
 
+        String[] allDataArray = allData.toArray(new String[0]);
+        
+        for (int i = 0; i < allDataArray.length; i++) {
+            String[] temp = allDataArray[i].split(",");
+            tableModel.addRow(temp);
+        }
+        
+        
     }
 
     /**
@@ -39,7 +55,11 @@ public class Table extends javax.swing.JFrame {
         searchTxtField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        table = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         homeNavBtn = new javax.swing.JButton();
         statsNavBtn = new javax.swing.JButton();
         logoutNavBtn = new javax.swing.JButton();
@@ -47,6 +67,7 @@ public class Table extends javax.swing.JFrame {
         tableNavBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Expense Tracker - Table");
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 720));
 
@@ -59,6 +80,11 @@ public class Table extends javax.swing.JFrame {
 
         searchButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         searchButton.setText("SEARCH");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         table.setModel(tableModel);
         jScrollPane1.setViewportView(table);
@@ -197,6 +223,33 @@ public class Table extends javax.swing.JFrame {
         this.dispose();
         new HomeFrame().setVisible(true);
     }//GEN-LAST:event_homeNavBtnActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        searching = !searching;
+        String searchTerm = searchTxtField.getText();
+
+        if(searching && searchTerm.length() > 0){
+            while(searchModel.getRowCount()>0){
+                searchModel.removeRow(0);
+            }
+            ArrayList<String> allData = handleData.readExpenses(searchTerm);
+
+            String[] allDataArray = allData.toArray(new String[0]);
+
+            for (int i = 0; i < allDataArray.length; i++) {
+                String[] temp = allDataArray[i].split(",");
+                searchModel.addRow(temp);
+            }
+            table.setModel(searchModel);
+            searchButton.setText("CLEAR");
+            
+        }else{
+            table.setModel(tableModel);
+            searchButton.setText("SEARCH");
+            searchTxtField.setText("");
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
