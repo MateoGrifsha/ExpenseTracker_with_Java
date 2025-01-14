@@ -88,10 +88,11 @@ public class DataHandler {
         }
         
         public String[] readExpenses(){
+            String[] dataExtracted = null;
             try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
                 String line;
             while ((line = br.readLine()) != null) {
-                String[] dataExtracted = line.split(",");
+                dataExtracted = line.split(",");
                 String name = dataExtracted[0];
                 String amount = dataExtracted[1];
                 String date = dataExtracted[2];
@@ -100,5 +101,7 @@ public class DataHandler {
             catch(IOException error){
                 error.printStackTrace();
             }
+            return dataExtracted;
         }
+        
 }
