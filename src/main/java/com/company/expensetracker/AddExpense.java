@@ -9,7 +9,7 @@ package com.company.expensetracker;
  * @author User
  */
 public class AddExpense extends javax.swing.JFrame {
-
+    //regex for date \\d{2}/.0\\d{2}/\\d{4} |||||||| \\d{2}/.1\\d{2}/\\d{4}
     /**
      * Creates new form AddExpense
      */

@@ -4,6 +4,7 @@
  */
 package com.company.expensetracker;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 /**
  *
  * @author User
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class HomeFrame extends javax.swing.JFrame {
     DataHandler handleData = new DataHandler();
     DefaultTableModel tableModel = new DefaultTableModel();
+    
 
     /**
      * Creates new form HomeFrame
@@ -21,6 +23,16 @@ public class HomeFrame extends javax.swing.JFrame {
         tableModel.addColumn("Name");
         tableModel.addColumn("Amount");
         tableModel.addColumn("Date");
+        
+        String[] allDataArray = handleData.readExpenses();
+        int length = allDataArray.length < 3 ? allDataArray.length : 3;
+        for (int i = 0; i < length; i++){
+            String[] temp = allDataArray[i].split(",");
+            tableModel.addRow(temp);
+        }
+        numberOfExpenses.setText(Integer.toString(allDataArray.length));
+        budgetNumber.setText(handleData.returnElementFromDB(2));
+        budgetTitleLabel.setText(handleData.returnElementFromDB(3));
     }
 
     /**
@@ -40,6 +52,11 @@ public class HomeFrame extends javax.swing.JFrame {
         addNavBtn = new javax.swing.JButton();
         tableNavBtn = new javax.swing.JButton();
         topLeftPanel = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        numberOfExpensesTitle = new javax.swing.JLabel();
+        budgetNumber = new javax.swing.JLabel();
+        budgetTitleLabel = new javax.swing.JLabel();
+        numberOfExpenses = new javax.swing.JLabel();
         topRightPanel = new javax.swing.JPanel();
         userIcon = new javax.swing.JLabel();
         greetingLbl = new javax.swing.JLabel();
@@ -98,15 +115,63 @@ public class HomeFrame extends javax.swing.JFrame {
 
         topLeftPanel.setBackground(new java.awt.Color(153, 153, 153));
 
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        numberOfExpensesTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        numberOfExpensesTitle.setForeground(new java.awt.Color(0, 0, 102));
+        numberOfExpensesTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numberOfExpensesTitle.setText("EXPENSES");
+
+        budgetNumber.setFont(new java.awt.Font("Segoe UI", 1, 96)); // NOI18N
+        budgetNumber.setForeground(new java.awt.Color(0, 0, 102));
+        budgetNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        budgetNumber.setText("50");
+
+        budgetTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        budgetTitleLabel.setForeground(new java.awt.Color(0, 0, 102));
+        budgetTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        budgetTitleLabel.setText("BUDGET");
+
+        numberOfExpenses.setFont(new java.awt.Font("Segoe UI", 1, 96)); // NOI18N
+        numberOfExpenses.setForeground(new java.awt.Color(0, 0, 102));
+        numberOfExpenses.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numberOfExpenses.setText("50");
+
         javax.swing.GroupLayout topLeftPanelLayout = new javax.swing.GroupLayout(topLeftPanel);
         topLeftPanel.setLayout(topLeftPanelLayout);
         topLeftPanelLayout.setHorizontalGroup(
             topLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(topLeftPanelLayout.createSequentialGroup()
+                .addGroup(topLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topLeftPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(budgetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(topLeftPanelLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(budgetTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addGroup(topLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(numberOfExpensesTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numberOfExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         topLeftPanelLayout.setVerticalGroup(
             topLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topLeftPanelLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(topLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(topLeftPanelLayout.createSequentialGroup()
+                        .addComponent(budgetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(budgetTitleLabel))
+                    .addGroup(topLeftPanelLayout.createSequentialGroup()
+                        .addComponent(numberOfExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numberOfExpensesTitle))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
 
         topRightPanel.setBackground(new java.awt.Color(0, 0, 102));
@@ -114,6 +179,9 @@ public class HomeFrame extends javax.swing.JFrame {
         userIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
 
         greetingLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        greetingLbl.setForeground(new java.awt.Color(255, 255, 255));
+        greetingLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        greetingLbl.setToolTipText("");
 
         javax.swing.GroupLayout topRightPanelLayout = new javax.swing.GroupLayout(topRightPanel);
         topRightPanel.setLayout(topRightPanelLayout);
@@ -123,26 +191,26 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(topRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPanelLayout.createSequentialGroup()
-                        .addComponent(greetingLbl)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPanelLayout.createSequentialGroup()
                         .addComponent(userIcon)
-                        .addGap(87, 87, 87))))
+                        .addGap(87, 87, 87))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPanelLayout.createSequentialGroup()
+                        .addComponent(greetingLbl)
+                        .addGap(106, 106, 106))))
         );
         topRightPanelLayout.setVerticalGroup(
             topRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(userIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(greetingLbl)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bottomLeftContainer.setBackground(new java.awt.Color(0, 0, 102));
 
         addExpenseBigBtn.setBackground(new java.awt.Color(0, 0, 102));
-        addExpenseBigBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/company/expensetracker/images/plus.png"))); // NOI18N
+        addExpenseBigBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\images\\plus.png")); // NOI18N
         addExpenseBigBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addExpenseBigBtnActionPerformed(evt);
@@ -150,6 +218,7 @@ public class HomeFrame extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("ADD EXPENSE");
 
         javax.swing.GroupLayout bottomLeftContainerLayout = new javax.swing.GroupLayout(bottomLeftContainer);
@@ -212,6 +281,18 @@ public class HomeFrame extends javax.swing.JFrame {
         mainHomePanel.setLayout(mainHomePanelLayout);
         mainHomePanelLayout.setHorizontalGroup(
             mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainHomePanelLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(mainHomePanelLayout.createSequentialGroup()
+                        .addComponent(topLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(topRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(mainHomePanelLayout.createSequentialGroup()
+                        .addComponent(bottomLeftContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(bottomRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainHomePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,18 +310,6 @@ public class HomeFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(logoutNavBtn)
                         .addGap(315, 315, 315))))
-            .addGroup(mainHomePanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(mainHomePanelLayout.createSequentialGroup()
-                        .addComponent(topLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(topRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainHomePanelLayout.createSequentialGroup()
-                        .addComponent(bottomLeftContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(bottomRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
         );
         mainHomePanelLayout.setVerticalGroup(
             mainHomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,15 +418,20 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JButton addNavBtn;
     private javax.swing.JPanel bottomLeftContainer;
     private javax.swing.JPanel bottomRightPanel;
+    private javax.swing.JLabel budgetNumber;
+    private javax.swing.JLabel budgetTitleLabel;
     private javax.swing.JLabel greetingLbl;
     private javax.swing.JButton homeNavBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutNavBtn;
     private javax.swing.JPanel mainHomePanel;
+    private javax.swing.JLabel numberOfExpenses;
+    private javax.swing.JLabel numberOfExpensesTitle;
     private javax.swing.JButton statsNavBtn;
     private javax.swing.JButton tableNavBtn;
     private javax.swing.JPanel topLeftPanel;

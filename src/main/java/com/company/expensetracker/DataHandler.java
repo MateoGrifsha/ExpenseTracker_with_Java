@@ -88,7 +88,7 @@ public class DataHandler {
             }//end catch
         }
         
-        public ArrayList<String> readExpenses(){
+        public String[] readExpenses(){
             try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
             ArrayList<String> allData = new ArrayList<String>();
             String line;
@@ -96,7 +96,7 @@ public class DataHandler {
                 allData.add(line);
             }
             
-            return allData; // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
+            return allData.toArray(new String[0]); // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
             }
             catch(IOException error){
                 error.printStackTrace();
@@ -104,7 +104,7 @@ public class DataHandler {
             }
         }
         //for search field
-        public ArrayList<String> readExpenses(String searchTerm){
+        public String[] readExpenses(String searchTerm){
             try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
             ArrayList<String> allData = new ArrayList<String>();
             String line;
@@ -115,7 +115,7 @@ public class DataHandler {
                 }
             }
             
-            return allData; // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
+            return allData.toArray(new String[0]); // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
             }
             catch(IOException error){
                 error.printStackTrace();

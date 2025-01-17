@@ -29,9 +29,7 @@ public class Table extends javax.swing.JFrame {
         searchModel.addColumn("Date");
         
         
-        ArrayList<String> allData = handleData.readExpenses();
-
-        String[] allDataArray = allData.toArray(new String[0]);
+        String[] allDataArray = handleData.readExpenses();
         
         for (int i = 0; i < allDataArray.length; i++) {
             String[] temp = allDataArray[i].split(",");
@@ -233,9 +231,8 @@ public class Table extends javax.swing.JFrame {
             while(searchModel.getRowCount()>0){
                 searchModel.removeRow(0);
             }
-            ArrayList<String> allData = handleData.readExpenses(searchTerm);
 
-            String[] allDataArray = allData.toArray(new String[0]);
+            String[] allDataArray = handleData.readExpenses(searchTerm);
 
             for (int i = 0; i < allDataArray.length; i++) {
                 String[] temp = allDataArray[i].split(",");
