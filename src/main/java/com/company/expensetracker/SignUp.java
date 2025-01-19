@@ -16,7 +16,7 @@ public class SignUp extends javax.swing.JFrame {
         //generated SignUp Constructor
     public SignUp() {
         initComponents();
-        if(!handleData.isFileEmpty(handleData.userInfoPath)){
+        if(!handleData.isFileEmpty()){
             JOptionPane.showMessageDialog(null,"There is an account already created, please log in instead! ");
         }
     }

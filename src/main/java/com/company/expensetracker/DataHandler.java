@@ -9,32 +9,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
 
 /**
  *
  * @author User
  */
-public class DataHandler {
-       //path to "DB
-        String userInfoPath ="C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\UserInfo.txt" ;
-        String expensePath = "C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\Expenses.txt";
+public class DataHandler extends FileHandler{
+
             
-        public boolean isFileEmpty(String path){
-            try{
-                BufferedReader br = new BufferedReader(new FileReader(path));
-                return br.readLine() == null;
-            }
-            catch(Exception error){
-                error.printStackTrace();
-                return false;
-            }
-        }
+
 
         //Writes in the text file the new data AND/OR checks if the file is already written in or not
         public void writeInDB(String username, String password, String budget, String currency){      
             try{
                 //reads from file and checks if it is empty or no
-                if(isFileEmpty(userInfoPath)){
+                if(isFileEmpty()){
                     String[] data = {username, password, budget, currency};
                     FileWriter fw = new FileWriter(userInfoPath);
                     for (int i = 0; i < 4; i++) {
@@ -103,25 +93,7 @@ public class DataHandler {
                 return null;
             }
         }
-        //for search field
-        public String[] readExpenses(String searchTerm){
-            try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
-            ArrayList<String> allData = new ArrayList<String>();
-            String line;
-            while ((line = br.readLine()) != null) {
-                if(line.toLowerCase().contains(searchTerm)){
-                    System.out.println(searchTerm);
-                    allData.add(line);
-                }
-            }
-            
-            return allData.toArray(new String[0]); // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
-            }
-            catch(IOException error){
-                error.printStackTrace();
-                return null;
-            }
-        }
+
         
         
 }

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.company.expensetracker;
-import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /**
  *
@@ -30,13 +31,9 @@ public class Validator {
         if(password.length() >= 8 && password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$")){
             return true;
         }
-//          JOptionPane.showMessageDialog(null,"Invalid Password. Password "
-//                    + "must contain atleast 1 capital letter "
-//                    + "1 lower case letter, 1 digit, 1"
-//                    + "special character (!#$%^&*|) and "
-//                    + "be atleast 8 characters long");
         return false;
     }
+    
     public boolean validateInputs(String username, String password, String budget){
         boolean isUsernameCorrect = username.length()>=3;
         boolean isBudgetCorrect = validateBudget(budget);

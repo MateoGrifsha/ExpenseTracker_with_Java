@@ -3,7 +3,7 @@
  */
 
 package com.company.expensetracker;
-
+import java.io.IOException;
 /**
  *
  * @author User
@@ -15,7 +15,8 @@ public class ExpenseTracker {
 //       s1.setVisible(true);
 //            Table t1 = new Table();
 //            t1.setVisible(true);
-        HomeFrame hf1 = new HomeFrame();
-        hf1.setVisible(true);
+//        HomeFrame hf1 = new HomeFrame();
+//        hf1.setVisible(true);
+        new Stats().setVisible(true);
     }
 }

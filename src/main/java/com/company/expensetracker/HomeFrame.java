@@ -19,14 +19,18 @@ public class HomeFrame extends javax.swing.JFrame {
      */
     public HomeFrame() {
         initComponents();
-        greetingLbl.setText("Greetings, " + handleData.returnElementFromDB(0));
+        StringBuilder greeting = new StringBuilder("Greetings, ");
+        greeting.append(handleData.returnElementFromDB(0));
+        greetingLbl.setText(greeting.toString());
+        
         tableModel.addColumn("Name");
         tableModel.addColumn("Amount");
         tableModel.addColumn("Date");
         
         String[] allDataArray = handleData.readExpenses();
         int length = allDataArray.length < 3 ? allDataArray.length : 3;
-        for (int i = 0; i < length; i++){
+        
+        for (int i = length; i >= 0; i--){
             String[] temp = allDataArray[i].split(",");
             tableModel.addRow(temp);
         }
