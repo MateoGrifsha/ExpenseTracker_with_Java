@@ -13,12 +13,12 @@ public class LastExpense extends Expense {
     String[] expenseData;
     
     @Override
-    public String[] retrieveLast() {
+    public String retrieveLastName() {
             String[] allData = handleData.readExpenses();
             
             expenseData = allData[allData.length - 1].split(",");
             
-        return expenseData;
+        return expenseData[0];
     }
     
 }

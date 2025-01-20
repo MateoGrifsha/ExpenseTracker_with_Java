@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.company.expensetracker;
 
 import java.io.BufferedReader;
@@ -9,18 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.File;
 
-/**
- *
- * @author User
- */
 public class DataHandler extends FileHandler{
-
-            
-
-
-        //Writes in the text file the new data AND/OR checks if the file is already written in or not
+    //Writes in the text file the new data AND/OR checks if the file is already written in or not
         public void writeInDB(String username, String password, String budget, String currency){      
             try{
                 //reads from file and checks if it is empty or no
@@ -43,26 +30,6 @@ public class DataHandler extends FileHandler{
             }//end catch
         }//end function writeInDB
         
-        public String returnElementFromDB(int index){
-            String[] readData = new String[4];
-            try{
-                BufferedReader br = new BufferedReader(new FileReader(userInfoPath));
-                            String line = br.readLine();
-                            int count = 0;
-                            while(line != null){
-                                readData[count]= line;
-                                count++;
-                                line = br.readLine();
-                            }
-                            br.close();
-            }            
-            catch(IOException error){
-                error.printStackTrace();
-                System.out.println("Couldn't read data!");
-            }//end catch
-            
-            return readData[index];
-        }
         
         public void addExpense(String name, String amount, String date){
             try{

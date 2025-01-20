@@ -11,6 +11,5 @@ package com.company.expensetracker;
 public abstract class Expense {
     String expenseData;
     
-    public abstract String[] retrieveLast();
-    
+    public abstract String retrieveLastName();
 }

@@ -1,15 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.company.expensetracker;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
-/**
- *
- * @author User
- */
 public class Validator {
 
         //checks if the budget string is a proper integer

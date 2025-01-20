@@ -4,7 +4,6 @@
  */
 package com.company.expensetracker;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 /**
  *
  * @author User
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public class HomeFrame extends javax.swing.JFrame {
     DataHandler handleData = new DataHandler();
     DefaultTableModel tableModel = new DefaultTableModel();
-    
+    CurrentUser cu = new CurrentUser();
 
     /**
      * Creates new form HomeFrame
@@ -20,7 +19,7 @@ public class HomeFrame extends javax.swing.JFrame {
     public HomeFrame() {
         initComponents();
         StringBuilder greeting = new StringBuilder("Greetings, ");
-        greeting.append(handleData.returnElementFromDB(0));
+        greeting.append(cu.getValue(0));
         greetingLbl.setText(greeting.toString());
         
         tableModel.addColumn("Name");
@@ -35,8 +34,8 @@ public class HomeFrame extends javax.swing.JFrame {
             tableModel.addRow(temp);
         }
         numberOfExpenses.setText(Integer.toString(allDataArray.length));
-        budgetNumber.setText(handleData.returnElementFromDB(2));
-        budgetTitleLabel.setText(handleData.returnElementFromDB(3));
+        budgetNumber.setText(cu.getValue(2));
+        budgetTitleLabel.setText(cu.getValue(3));
     }
 
     /**

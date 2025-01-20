@@ -1,7 +1,6 @@
 package com.company.expensetracker;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Stats extends javax.swing.JFrame implements Sortable{
     //implementing interface methods
     @Override
@@ -43,13 +42,11 @@ public class Stats extends javax.swing.JFrame implements Sortable{
     
     DataHandler dataHandler = new DataHandler();
     LastExpense lastExp = new LastExpense();
+    CurrentUser cu = new CurrentUser();
     
-
-    /**
-     * Creates new form Stats
-     */
     public Stats() {
         initComponents();
+        
         sortByNameTableModel.addColumn("Name");
         sortByNameTableModel.addColumn("Amount");
         sortByNameTableModel.addColumn("Date");
@@ -58,12 +55,20 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         sortByAmountTableModel.addColumn("Amount");
         sortByAmountTableModel.addColumn("Date");
         
-        String lastAddedItem = lastExp.retrieveLast()[0];
+        String lastAddedItem = lastExp.retrieveLastName();
         lastAddedLabel.setText(lastAddedItem);
         
+        int lastItem = dataHandler.readExpenses().length - 1;
+        StringBuilder mostExpensivePurchase = new StringBuilder(bubbleSortByAmount(dataHandler.readExpenses())[lastItem].split(",")[1] ); 
+        mostExpensivePurchase.append(" ");
+        mostExpensivePurchase.append(cu.getValue(3));
+        mostExpensiveLabel.setText(mostExpensivePurchase.toString());
+        
+        lastUpdatedLabel.setText(dataHandler.readExpenses()[lastItem].split(",")[2] );
+
         //filling sort by name table model
         String[] tableData= bubbleSortByName(dataHandler.readExpenses());
-        
+
         for (int i = 0; i < tableData.length; i++) {
             String[] temp = tableData[i].split(",");
             sortByNameTableModel.addRow(temp);
@@ -109,7 +114,7 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         mostExpensiveLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        lastAddedLabel2 = new javax.swing.JLabel();
+        lastUpdatedLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Expense Tracker - Stats");
@@ -263,7 +268,7 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         mostExpensiveSubheading.setText("MOST EXPENSIVE PURCHASE");
 
         mostExpensiveLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        mostExpensiveLabel.setForeground(new java.awt.Color(255, 255, 255));
+        mostExpensiveLabel.setForeground(new java.awt.Color(0, 0, 102));
         mostExpensiveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         mostExpensiveLabel.setText("...");
 
@@ -295,31 +300,32 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("TO BE ADDED");
+        jLabel5.setText("LAST UPDATE ADDED");
 
-        lastAddedLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lastAddedLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        lastAddedLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lastAddedLabel2.setText("...");
+        lastUpdatedLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lastUpdatedLabel.setForeground(new java.awt.Color(255, 255, 255));
+        lastUpdatedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lastUpdatedLabel.setText("...");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lastAddedLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(lastUpdatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(61, 61, 61))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(lastAddedLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lastUpdatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jLabel5)
                 .addContainerGap())
@@ -481,8 +487,8 @@ public class Stats extends javax.swing.JFrame implements Sortable{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lastAddedExpensePanel;
     private javax.swing.JLabel lastAddedLabel;
-    private javax.swing.JLabel lastAddedLabel2;
     private javax.swing.JLabel lastAddedSubheading;
+    private javax.swing.JLabel lastUpdatedLabel;
     private javax.swing.JButton logoutNavBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel mostExpensiveLabel;
