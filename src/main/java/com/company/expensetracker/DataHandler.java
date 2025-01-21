@@ -47,7 +47,7 @@ public class DataHandler extends FileHandler{
         
         public String[] readExpenses(){
             try(BufferedReader br = new BufferedReader(new FileReader(expensePath))){
-            ArrayList<String> allData = new ArrayList<String>();
+            ArrayList<String> allData = new ArrayList<String>(); // array list because it doesnt have a limit on the number of items added
             String line;
             while ((line = br.readLine()) != null) {
                 allData.add(line);
@@ -58,6 +58,20 @@ public class DataHandler extends FileHandler{
             catch(IOException error){
                 error.printStackTrace();
                 return null;
+            }
+        }
+        
+        public void updateBudgetInDB(String username, String password, String budget, String currency){   
+            try{
+                String[] data = {username, password, budget, currency};
+                FileWriter fw = new FileWriter(userInfoPath);
+                
+                for (int i = 0; i < 4; i++) {
+                   fw.write(data[i] + "\n");
+                }   
+                fw.close();
+            }catch(IOException error){
+                error.printStackTrace();
             }
         }
 

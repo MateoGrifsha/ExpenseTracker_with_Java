@@ -22,7 +22,7 @@ public class Table extends javax.swing.JFrame implements Searchable {
                         allData.add(line);
                     }
                 }
-                return allData.toArray(new String[0]); // returns entirety of lines in  the format {"blabla,123,12/12/2023" , "blablabla,321,12/32/32"}
+                return allData.toArray(new String[0]); // returns entirety of lines in  the format {"name,123,12/12/2023" , "name,321,12/32/32"}
             }
                 catch(Exception error){
                     error.printStackTrace();

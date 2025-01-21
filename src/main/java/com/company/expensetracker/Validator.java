@@ -24,6 +24,14 @@ public class Validator {
         return false;
     }
     
+    public boolean validateDate(String date){
+        if(date.matches("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public boolean validateInputs(String username, String password, String budget){
         boolean isUsernameCorrect = username.length()>=3;
         boolean isBudgetCorrect = validateBudget(budget);

@@ -11,7 +11,8 @@ import java.io.IOException;
 public class ExpenseTracker {
 
     public static void main(String[] args) {
-       SignUp s1 = new SignUp();
-       s1.setVisible(true);
+//       SignUp s1 = new SignUp();
+//       s1.setVisible(true);
+    new AddExpense().setVisible(true);
     }
 }

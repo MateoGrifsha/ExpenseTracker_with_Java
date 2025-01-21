@@ -59,7 +59,7 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         lastAddedLabel.setText(lastAddedItem);
         
         int lastItem = dataHandler.readExpenses().length - 1;
-        StringBuilder mostExpensivePurchase = new StringBuilder(bubbleSortByAmount(dataHandler.readExpenses())[lastItem].split(",")[1] ); 
+        StringBuilder mostExpensivePurchase = new StringBuilder(bubbleSortByAmount(dataHandler.readExpenses())[lastItem].split(",")[1] );  //orders expenses by amount, then takes the last item of it and splits it into three parts and then chooses the price which is the second attribute
         mostExpensivePurchase.append(" ");
         mostExpensivePurchase.append(cu.getValue(3));
         mostExpensiveLabel.setText(mostExpensivePurchase.toString());
@@ -76,8 +76,8 @@ public class Stats extends javax.swing.JFrame implements Sortable{
         
         //filling sort by a mount table model
         tableData= bubbleSortByAmount(dataHandler.readExpenses());
-        
-        for (int i = 0; i < tableData.length; i++) {
+        //fill backwards
+        for (int i = lastItem; i >0; i--) {
             String[] temp = tableData[i].split(",");
             sortByAmountTableModel.addRow(temp);
         }

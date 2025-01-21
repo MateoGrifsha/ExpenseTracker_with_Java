@@ -27,12 +27,15 @@ public class HomeFrame extends javax.swing.JFrame {
         tableModel.addColumn("Date");
         
         String[] allDataArray = handleData.readExpenses();
-        int length = allDataArray.length < 3 ? allDataArray.length : 3;
         
-        for (int i = length; i >= 0; i--){
+        int lastItem = allDataArray.length - 1; //index of last item
+        int length = lastItem > 7  ? lastItem - 5 :  0;  
+        System.out.println(length);
+        for (int i = lastItem; i >= length; i--){
             String[] temp = allDataArray[i].split(",");
             tableModel.addRow(temp);
         }
+        
         numberOfExpenses.setText(Integer.toString(allDataArray.length));
         budgetNumber.setText(cu.getValue(2));
         budgetTitleLabel.setText(cu.getValue(3));
@@ -179,8 +182,6 @@ public class HomeFrame extends javax.swing.JFrame {
 
         topRightPanel.setBackground(new java.awt.Color(0, 0, 102));
 
-        userIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\images\\user.png")); // NOI18N
-
         greetingLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         greetingLbl.setForeground(new java.awt.Color(255, 255, 255));
         greetingLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -213,7 +214,6 @@ public class HomeFrame extends javax.swing.JFrame {
         bottomLeftContainer.setBackground(new java.awt.Color(0, 0, 102));
 
         addExpenseBigBtn.setBackground(new java.awt.Color(0, 0, 102));
-        addExpenseBigBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\ExpenseTracker_with_Java\\src\\main\\java\\com\\company\\expensetracker\\images\\plus.png")); // NOI18N
         addExpenseBigBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addExpenseBigBtnActionPerformed(evt);
@@ -251,7 +251,7 @@ public class HomeFrame extends javax.swing.JFrame {
         bottomRightPanel.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 102));
         jLabel3.setText("RECENT EXPENSES");
 
         jTable1.setModel(tableModel);
