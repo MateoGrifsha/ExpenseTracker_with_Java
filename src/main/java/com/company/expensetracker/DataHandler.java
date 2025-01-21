@@ -61,7 +61,7 @@ public class DataHandler extends FileHandler{
             }
         }
         
-        public void updateBudgetInDB(String username, String password, String budget, String currency){   
+        public void updateDataInDB(String username, String password, String budget, String currency){   
             try{
                 String[] data = {username, password, budget, currency};
                 FileWriter fw = new FileWriter(userInfoPath);

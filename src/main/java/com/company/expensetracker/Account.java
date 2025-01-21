@@ -386,18 +386,18 @@ public class Account extends javax.swing.JFrame {
 
     private void deleteAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccBtnActionPerformed
         // TODO add your handling code here:
-        try (FileWriter fileWriter = new FileWriter("UserInfo.txt", false)) {
+        try (FileWriter fileWriter = new FileWriter(dh.userInfoPath, false)) {
             fileWriter.write("");  
             this.dispose();
             new SignUp().setVisible(true);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "ERROE DELETING YOUR ACCOUNT!");
+            JOptionPane.showMessageDialog(this, "ERROR DELETING YOUR ACCOUNT!");
         }
     }//GEN-LAST:event_deleteAccBtnActionPerformed
 
     private void submitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBTNActionPerformed
         // TODO add your handling code here:
-        dh.writeInDB(newNameTxtField.getText(), newPasswordTxtField.getText(), budgetTxtField.getText(), (String)currencyComboBox.getSelectedItem());
+        dh.updateDataInDB(newNameTxtField.getText(), newPasswordTxtField.getText(), budgetTxtField.getText(), (String)currencyComboBox.getSelectedItem());
     }//GEN-LAST:event_submitBTNActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed

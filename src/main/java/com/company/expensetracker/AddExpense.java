@@ -264,7 +264,7 @@ public class AddExpense extends javax.swing.JFrame {
 
             //Update budget - only updated on succesful validation
             int budget= Integer.parseInt(cu.getValue(2))-Integer.parseInt(priceTxtField.getText());
-            dh.updateBudgetInDB(cu.getValue(0), cu.getValue(1), Integer.toString(budget), cu.getValue(3));
+            dh.updateDataInDB(cu.getValue(0), cu.getValue(1), Integer.toString(budget), cu.getValue(3));
  
             additionMessage.setForeground(Color.GREEN);
             additionMessage.setText("Expense added successfully!");
